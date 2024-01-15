@@ -7,14 +7,14 @@ import org.junit.jupiter.params.provider.MethodSource
 class RoverTest {
     @Test
     fun `coordinates gives the actual position`() {
-        val rover = Rover(Coordinates(1, 1), Direction.NORTH)
+        val rover = Rover(Coordinates(1, 1), North())
         assertThat(rover.coordinates()).isEqualTo(Coordinates(1, 1))
     }
 
     @Test
     fun `coordinates gives the actual direction`() {
-        val rover = Rover(Coordinates(1, 1), Direction.NORTH)
-        assertThat(rover.direction()).isEqualTo(Direction.NORTH)
+        val rover = Rover(Coordinates(1, 1), North())
+        assertThat(rover.direction()::class).isEqualTo(North::class)
     }
 
     @ParameterizedTest(name = "to {1} the rover in {0} should move to {2}")
@@ -39,7 +39,7 @@ class RoverTest {
         val rover = Rover(Coordinates(1, 1), initial)
         rover.turnLeft()
         assertThat(rover.coordinates()).isEqualTo(Coordinates(1, 1))
-        assertThat(rover.direction()).isEqualTo(expected)
+        assertThat(rover.direction()::class).isEqualTo(expected::class)
     }
 
     @ParameterizedTest(name = " from {0} to {1}")
@@ -48,41 +48,41 @@ class RoverTest {
         val rover = Rover(Coordinates(1, 1), initial)
         rover.turnRight()
         assertThat(rover.coordinates()).isEqualTo(Coordinates(1, 1))
-        assertThat(rover.direction()).isEqualTo(expected)
+        assertThat(rover.direction()::class).isEqualTo(expected::class)
     }
 
 
     companion object {
         @JvmStatic
         fun getForwardData() = listOf(
-            Arguments.of(Coordinates(1, 1), Direction.NORTH, Coordinates(1, 0)),
-            Arguments.of(Coordinates(1, 1), Direction.SOUTH, Coordinates(1, 2)),
-            Arguments.of(Coordinates(1, 1), Direction.EAST, Coordinates(2, 1)),
-            Arguments.of(Coordinates(1, 1), Direction.WEST, Coordinates(0, 1))
+            Arguments.of(Coordinates(1, 1), North(), Coordinates(1, 0)),
+            Arguments.of(Coordinates(1, 1), South(), Coordinates(1, 2)),
+            Arguments.of(Coordinates(1, 1), East(), Coordinates(2, 1)),
+            Arguments.of(Coordinates(1, 1), West(), Coordinates(0, 1))
         )
 
         @JvmStatic
         fun getBackwardData() = listOf(
-            Arguments.of(Coordinates(1, 1), Direction.NORTH, Coordinates(1, 2)),
-            Arguments.of(Coordinates(1, 1), Direction.SOUTH, Coordinates(1, 0)),
-            Arguments.of(Coordinates(1, 1), Direction.EAST, Coordinates(0, 1)),
-            Arguments.of(Coordinates(1, 1), Direction.WEST, Coordinates(2, 1))
+            Arguments.of(Coordinates(1, 1), North(), Coordinates(1, 2)),
+            Arguments.of(Coordinates(1, 1), South(), Coordinates(1, 0)),
+            Arguments.of(Coordinates(1, 1), East(), Coordinates(0, 1)),
+            Arguments.of(Coordinates(1, 1), West(), Coordinates(2, 1))
         )
 
         @JvmStatic
         fun getTurnLeftData() = listOf(
-            Arguments.of(Direction.NORTH, Direction.WEST),
-            Arguments.of(Direction.WEST, Direction.SOUTH),
-            Arguments.of(Direction.SOUTH, Direction.EAST),
-            Arguments.of(Direction.EAST, Direction.NORTH)
+            Arguments.of(North(), West()),
+            Arguments.of(West(), South()),
+            Arguments.of(South(), East()),
+            Arguments.of(East(), North())
         )
 
         @JvmStatic
         fun getTurnRightData() = listOf(
-            Arguments.of(Direction.NORTH, Direction.EAST),
-            Arguments.of(Direction.WEST, Direction.NORTH),
-            Arguments.of(Direction.SOUTH, Direction.WEST),
-            Arguments.of(Direction.EAST, Direction.SOUTH)
+            Arguments.of(North(), East()),
+            Arguments.of(West(), North()),
+            Arguments.of(South(), West()),
+            Arguments.of(East(), South())
         )
     }
 }
