@@ -1,13 +1,15 @@
-class South: Direction {
+package direction
+
+class North: Direction {
     override fun opposite(): Direction {
-        return North()
+        return South()
     }
 
     override fun rotateCounterclockwise(): Direction {
-        return East()
+        return West()
     }
 
     override fun rotateClockwise(): Direction {
-        return West()
+        return East()
     }
 }

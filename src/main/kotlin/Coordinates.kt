@@ -1,3 +1,5 @@
+import direction.*
+
 data class Coordinates(val westToEast: Int, val northToSouth: Int) {
     fun towards(direction: Direction): Coordinates {
         return when (direction) {

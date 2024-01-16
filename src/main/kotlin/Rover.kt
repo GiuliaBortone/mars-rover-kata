@@ -1,3 +1,5 @@
+import direction.Direction
+
 class Rover(initialCoordinates: Coordinates, private val initialDirection: Direction) {
     private var coordinates = initialCoordinates
     private var direction = initialDirection
