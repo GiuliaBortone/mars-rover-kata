@@ -11,7 +11,7 @@ import turn.Right
 class ExplorationTest {
     @Test
     fun `command rover to turn left`() {
-        val planet = PlanetGrid(2)
+        val planet = PlanetGrid(3)
         val rover = Rover(Coordinates(1, 1), North())
         val exploration = Exploration(planet, rover)
 
@@ -22,7 +22,7 @@ class ExplorationTest {
 
     @Test
     fun `command rover to turn right`() {
-        val planet = PlanetGrid(2)
+        val planet = PlanetGrid(3)
         val rover = Rover(Coordinates(1, 1), North())
         val exploration = Exploration(planet, rover)
 
@@ -33,7 +33,7 @@ class ExplorationTest {
 
     @Test
     fun `command rover to move forwards`() {
-        val planet = PlanetGrid(2)
+        val planet = PlanetGrid(3)
         val rover = Rover(Coordinates(1, 1), North())
         val exploration = Exploration(planet, rover)
 
@@ -44,7 +44,7 @@ class ExplorationTest {
 
     @Test
     fun `command rover to move backwards`() {
-        val planet = PlanetGrid(2)
+        val planet = PlanetGrid(3)
         val rover = Rover(Coordinates(1, 1), North())
         val exploration = Exploration(planet, rover)
 

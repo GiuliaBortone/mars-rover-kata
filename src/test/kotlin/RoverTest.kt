@@ -6,6 +6,8 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 class RoverTest {
+    private val planetGrid = PlanetGrid(3, 4)
+
     @Test
     fun `coordinates gives the actual position`() {
         val rover = Rover(Coordinates(1, 1), North())
@@ -22,7 +24,15 @@ class RoverTest {
     @MethodSource("getForwardData")
     fun `move forward`(initial: Coordinates, direction: Direction, expectedCoordinates: Coordinates) {
         val rover = Rover(initial, direction)
-        rover.forward()
+        rover.forward(planetGrid)
+        assertThat(rover.coordinates()).isEqualTo(expectedCoordinates)
+    }
+
+    @ParameterizedTest(name = "to {1} the rover in {0} should move to {2}")
+    @MethodSource("getForwardDataForEdgeCases")
+    fun `edge cases - move forward`(initial: Coordinates, direction: Direction, expectedCoordinates: Coordinates) {
+        val rover = Rover(initial, direction)
+        rover.forward(planetGrid)
         assertThat(rover.coordinates()).isEqualTo(expectedCoordinates)
     }
 
@@ -30,7 +40,15 @@ class RoverTest {
     @MethodSource("getBackwardData")
     fun `move backward`(initial: Coordinates, direction: Direction, expectedCoordinates: Coordinates) {
         val rover = Rover(initial, direction)
-        rover.backward()
+        rover.backward(planetGrid)
+        assertThat(rover.coordinates()).isEqualTo(expectedCoordinates)
+    }
+
+    @ParameterizedTest(name = "to {1} the rover in {0} should move to {2}")
+    @MethodSource("getBackwardDataForEdgeCases")
+    fun `edge cases - move backward`(initial: Coordinates, direction: Direction, expectedCoordinates: Coordinates) {
+        val rover = Rover(initial, direction)
+        rover.backward(planetGrid)
         assertThat(rover.coordinates()).isEqualTo(expectedCoordinates)
     }
 
@@ -63,11 +81,27 @@ class RoverTest {
         )
 
         @JvmStatic
+        fun getForwardDataForEdgeCases() = listOf(
+            Arguments.of(Coordinates(1, 0), North(), Coordinates(1, 3)),
+            Arguments.of(Coordinates(1, 3), South(), Coordinates(1, 0)),
+            Arguments.of(Coordinates(0, 1), West(), Coordinates(2, 1)),
+            Arguments.of(Coordinates(2, 1), East(), Coordinates(0, 1))
+        )
+
+        @JvmStatic
         fun getBackwardData() = listOf(
             Arguments.of(Coordinates(1, 1), North(), Coordinates(1, 2)),
             Arguments.of(Coordinates(1, 1), South(), Coordinates(1, 0)),
             Arguments.of(Coordinates(1, 1), East(), Coordinates(0, 1)),
             Arguments.of(Coordinates(1, 1), West(), Coordinates(2, 1))
+        )
+
+        @JvmStatic
+        fun getBackwardDataForEdgeCases() = listOf(
+            Arguments.of(Coordinates(1, 0), South(), Coordinates(1, 3)),
+            Arguments.of(Coordinates(1, 3), North(), Coordinates(1, 0)),
+            Arguments.of(Coordinates(0, 1), East(), Coordinates(2, 1)),
+            Arguments.of(Coordinates(2, 1), West(), Coordinates(0, 1))
         )
 
         @JvmStatic

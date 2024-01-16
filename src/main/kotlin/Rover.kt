@@ -12,12 +12,12 @@ class Rover(initialCoordinates: Coordinates, private val initialDirection: Direc
         return direction
     }
 
-    fun forward() {
-        coordinates = coordinates.towards(initialDirection)
+    fun forward(planetGrid: PlanetGrid) {
+        coordinates = coordinates.towards(initialDirection, planetGrid)
     }
 
-    fun backward() {
-        coordinates = coordinates.towards(initialDirection.opposite())
+    fun backward(planetGrid: PlanetGrid) {
+        coordinates = coordinates.towards(initialDirection.opposite(), planetGrid)
     }
 
     fun turnLeft() {

@@ -1,7 +1,8 @@
 package movement
 
+import PlanetGrid
 import Rover
 
 interface Movement {
-    fun move(rover: Rover)
+    fun move(planetGrid: PlanetGrid, rover: Rover)
 }
