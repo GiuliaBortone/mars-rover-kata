@@ -1,7 +1,10 @@
 import cardinalPoint.CardinalPoint
+import direction.Direction
 import direction.Left
 import direction.Right
-import direction.Direction
+import movement.Backward
+import movement.Forward
+import movement.Movement
 
 class Rover(initialCoordinates: Coordinates, private val initialCardinalPoint: CardinalPoint) {
     private var coordinates = initialCoordinates
@@ -15,11 +18,25 @@ class Rover(initialCoordinates: Coordinates, private val initialCardinalPoint: C
         return cardinalPoint
     }
 
-    fun forward(planetGrid: PlanetGrid) {
+    fun turn(direction: Direction) {
+        when (direction) {
+            is Left -> turnLeft()
+            is Right -> turnRight()
+        }
+    }
+
+    fun move(movement: Movement, planetGrid: PlanetGrid) {
+        when (movement) {
+            is Forward -> forward(planetGrid)
+            is Backward -> backward(planetGrid)
+        }
+    }
+
+    private fun forward(planetGrid: PlanetGrid) {
         coordinates = coordinates.towards(initialCardinalPoint, planetGrid)
     }
 
-    fun backward(planetGrid: PlanetGrid) {
+    private fun backward(planetGrid: PlanetGrid) {
         coordinates = coordinates.towards(initialCardinalPoint.opposite(), planetGrid)
     }
 
@@ -29,12 +46,5 @@ class Rover(initialCoordinates: Coordinates, private val initialCardinalPoint: C
 
     private fun turnRight() {
         cardinalPoint = cardinalPoint.rotateClockwise()
-    }
-
-    fun turn(direction: Direction) {
-        when (direction) {
-            is Left -> turnLeft()
-            is Right -> turnRight()
-        }
     }
 }

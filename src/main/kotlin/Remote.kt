@@ -9,7 +9,7 @@ class Remote(private val planetGrid: PlanetGrid, private val rover: Rover) {
     }
 
     fun moveRover(movement: Movement): Coordinates {
-        movement.move(planetGrid, rover)
+        rover.move(movement, planetGrid)
         return rover.coordinates()
     }
 }
