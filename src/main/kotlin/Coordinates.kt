@@ -1,18 +1,18 @@
 import cardinalPoint.*
 
 data class Coordinates(val westToEast: Int, val northToSouth: Int) {
-    fun towards(cardinalPoint: CardinalPoint, planetGrid: PlanetGrid): Coordinates {
+    fun towards(cardinalPoint: CardinalPoint, planet: Planet): Coordinates {
         return when (cardinalPoint) {
             is North -> {
                 if (northToSouth == 0) {
-                    Coordinates(westToEast, planetGrid.verticalMeasure - 1)
+                    Coordinates(westToEast, planet.verticalMeasure - 1)
                 } else {
                     Coordinates(westToEast, northToSouth - 1)
                 }
             }
 
             is South -> {
-                if (northToSouth == planetGrid.verticalMeasure - 1) {
+                if (northToSouth == planet.verticalMeasure - 1) {
                     Coordinates(westToEast, 0)
                 } else {
                     Coordinates(westToEast, northToSouth + 1)
@@ -21,14 +21,14 @@ data class Coordinates(val westToEast: Int, val northToSouth: Int) {
 
             is West -> {
                 if (westToEast == 0) {
-                    Coordinates(planetGrid.horizontalMeasure - 1, northToSouth)
+                    Coordinates(planet.horizontalMeasure - 1, northToSouth)
                 } else {
                     Coordinates(westToEast - 1, northToSouth)
                 }
             }
 
             is East -> {
-                if (westToEast == planetGrid.horizontalMeasure - 1) {
+                if (westToEast == planet.horizontalMeasure - 1) {
                     Coordinates(0, northToSouth)
                 } else {
                     Coordinates(westToEast + 1, northToSouth)

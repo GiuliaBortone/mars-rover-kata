@@ -12,7 +12,7 @@ import movement.Forward
 import movement.Movement
 
 class RoverTest {
-    private val planetGrid = PlanetGrid(3, 4)
+    private val planet = Planet(3, 4)
 
     @Test
     fun `coordinates gives the actual position`() {
@@ -30,7 +30,7 @@ class RoverTest {
     @MethodSource("getMovementData")
     fun move(initial: Coordinates, cardinalPoint: CardinalPoint, expectedCoordinates: Coordinates, movement: Movement) {
         val rover = Rover(initial, cardinalPoint)
-        rover.move(movement, planetGrid)
+        rover.move(movement, planet)
         assertThat(rover.coordinates()).isEqualTo(expectedCoordinates)
     }
 
@@ -38,7 +38,7 @@ class RoverTest {
     @MethodSource("getMovementDataForEdgeCases")
     fun `edge cases - move`(initial: Coordinates, cardinalPoint: CardinalPoint, expectedCoordinates: Coordinates, movement: Movement) {
         val rover = Rover(initial, cardinalPoint)
-        rover.move(movement, planetGrid)
+        rover.move(movement, planet)
         assertThat(rover.coordinates()).isEqualTo(expectedCoordinates)
     }
 

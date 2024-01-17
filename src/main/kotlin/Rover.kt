@@ -25,19 +25,19 @@ class Rover(initialCoordinates: Coordinates, private val initialCardinalPoint: C
         }
     }
 
-    fun move(movement: Movement, planetGrid: PlanetGrid) {
+    fun move(movement: Movement, planet: Planet) {
         when (movement) {
-            is Forward -> forward(planetGrid)
-            is Backward -> backward(planetGrid)
+            is Forward -> forward(planet)
+            is Backward -> backward(planet)
         }
     }
 
-    private fun forward(planetGrid: PlanetGrid) {
-        coordinates = coordinates.towards(initialCardinalPoint, planetGrid)
+    private fun forward(planet: Planet) {
+        coordinates = coordinates.towards(initialCardinalPoint, planet)
     }
 
-    private fun backward(planetGrid: PlanetGrid) {
-        coordinates = coordinates.towards(initialCardinalPoint.opposite(), planetGrid)
+    private fun backward(planet: Planet) {
+        coordinates = coordinates.towards(initialCardinalPoint.opposite(), planet)
     }
 
     private fun turnLeft() {

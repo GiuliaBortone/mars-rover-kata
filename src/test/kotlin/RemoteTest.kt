@@ -11,7 +11,7 @@ import direction.Right
 class RemoteTest {
     @Test
     fun `command rover to turn left`() {
-        val planet = PlanetGrid(3)
+        val planet = Planet(3)
         val rover = Rover(Coordinates(1, 1), North())
         val remote = Remote(planet, rover)
 
@@ -20,7 +20,7 @@ class RemoteTest {
 
     @Test
     fun `command rover to turn right`() {
-        val planet = PlanetGrid(3)
+        val planet = Planet(3)
         val rover = Rover(Coordinates(1, 1), North())
         val remote = Remote(planet, rover)
 
@@ -29,7 +29,7 @@ class RemoteTest {
 
     @Test
     fun `command rover to move forwards`() {
-        val planet = PlanetGrid(3)
+        val planet = Planet(3)
         val rover = Rover(Coordinates(1, 1), North())
         val remote = Remote(planet, rover)
 
@@ -38,7 +38,7 @@ class RemoteTest {
 
     @Test
     fun `command rover to move backwards`() {
-        val planet = PlanetGrid(3)
+        val planet = Planet(3)
         val rover = Rover(Coordinates(1, 1), North())
         val remote = Remote(planet, rover)
 
