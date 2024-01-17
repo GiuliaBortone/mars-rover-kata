@@ -8,48 +8,40 @@ import org.junit.jupiter.api.Test
 import turn.Left
 import turn.Right
 
-class ExplorationTest {
+class RemoteTest {
     @Test
     fun `command rover to turn left`() {
         val planet = PlanetGrid(3)
         val rover = Rover(Coordinates(1, 1), North())
-        val exploration = Exploration(planet, rover)
+        val remote = Remote(planet, rover)
 
-        exploration.turnRover(Left())
-
-        assertThat(rover.direction()::class).isEqualTo(West()::class)
+        assertThat(remote.turnRover(Left())::class).isEqualTo(West()::class)
     }
 
     @Test
     fun `command rover to turn right`() {
         val planet = PlanetGrid(3)
         val rover = Rover(Coordinates(1, 1), North())
-        val exploration = Exploration(planet, rover)
+        val remote = Remote(planet, rover)
 
-        exploration.turnRover(Right())
-
-        assertThat(rover.direction()::class).isEqualTo(East()::class)
+        assertThat(remote.turnRover(Right())::class).isEqualTo(East()::class)
     }
 
     @Test
     fun `command rover to move forwards`() {
         val planet = PlanetGrid(3)
         val rover = Rover(Coordinates(1, 1), North())
-        val exploration = Exploration(planet, rover)
+        val remote = Remote(planet, rover)
 
-        exploration.moveRover(Forward())
-
-        assertThat(rover.coordinates()).isEqualTo(Coordinates(1, 0))
+        assertThat(remote.moveRover(Forward())).isEqualTo(Coordinates(1, 0))
     }
 
     @Test
     fun `command rover to move backwards`() {
         val planet = PlanetGrid(3)
         val rover = Rover(Coordinates(1, 1), North())
-        val exploration = Exploration(planet, rover)
+        val remote = Remote(planet, rover)
 
-        exploration.moveRover(Backward())
-
-        assertThat(rover.coordinates()).isEqualTo(Coordinates(1, 2))
+        assertThat(remote.moveRover(Backward())).isEqualTo(Coordinates(1, 2))
     }
 }
