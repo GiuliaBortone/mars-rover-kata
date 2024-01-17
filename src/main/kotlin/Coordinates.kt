@@ -1,8 +1,8 @@
-import direction.*
+import cardinalPoint.*
 
 data class Coordinates(val westToEast: Int, val northToSouth: Int) {
-    fun towards(direction: Direction, planetGrid: PlanetGrid): Coordinates {
-        return when (direction) {
+    fun towards(cardinalPoint: CardinalPoint, planetGrid: PlanetGrid): Coordinates {
+        return when (cardinalPoint) {
             is North -> {
                 if (northToSouth == 0) {
                     Coordinates(westToEast, planetGrid.verticalMeasure - 1)

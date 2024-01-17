@@ -1,12 +1,12 @@
-import direction.East
-import direction.North
-import direction.West
+import cardinalPoint.East
+import cardinalPoint.North
+import cardinalPoint.West
 import movement.Backward
 import movement.Forward
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import turn.Left
-import turn.Right
+import direction.Left
+import direction.Right
 
 class RemoteTest {
     @Test

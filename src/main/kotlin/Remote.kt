@@ -1,10 +1,10 @@
-import direction.Direction
+import cardinalPoint.CardinalPoint
 import movement.Movement
-import turn.Turn
+import direction.Direction
 
 class Remote(private val planetGrid: PlanetGrid, private val rover: Rover) {
-    fun turnRover(turn: Turn): Direction {
-        turn.turn(rover)
+    fun turnRover(direction: Direction): CardinalPoint {
+        rover.turn(direction)
         return rover.direction()
     }
 

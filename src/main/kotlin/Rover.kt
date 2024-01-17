@@ -1,30 +1,40 @@
+import cardinalPoint.CardinalPoint
+import direction.Left
+import direction.Right
 import direction.Direction
 
-class Rover(initialCoordinates: Coordinates, private val initialDirection: Direction) {
+class Rover(initialCoordinates: Coordinates, private val initialCardinalPoint: CardinalPoint) {
     private var coordinates = initialCoordinates
-    private var direction = initialDirection
+    private var cardinalPoint = initialCardinalPoint
 
     fun coordinates(): Coordinates {
         return coordinates
     }
 
-    fun direction(): Direction {
-        return direction
+    fun direction(): CardinalPoint {
+        return cardinalPoint
     }
 
     fun forward(planetGrid: PlanetGrid) {
-        coordinates = coordinates.towards(initialDirection, planetGrid)
+        coordinates = coordinates.towards(initialCardinalPoint, planetGrid)
     }
 
     fun backward(planetGrid: PlanetGrid) {
-        coordinates = coordinates.towards(initialDirection.opposite(), planetGrid)
+        coordinates = coordinates.towards(initialCardinalPoint.opposite(), planetGrid)
     }
 
-    fun turnLeft() {
-        direction = direction.rotateCounterclockwise()
+    private fun turnLeft() {
+        cardinalPoint = cardinalPoint.rotateCounterclockwise()
     }
 
-    fun turnRight() {
-        direction = direction.rotateClockwise()
+    private fun turnRight() {
+        cardinalPoint = cardinalPoint.rotateClockwise()
+    }
+
+    fun turn(direction: Direction) {
+        when (direction) {
+            is Left -> turnLeft()
+            is Right -> turnRight()
+        }
     }
 }
